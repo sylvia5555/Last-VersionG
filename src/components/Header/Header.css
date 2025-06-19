@@ -1,0 +1,174 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  z-index: 1000;
+  border-bottom: 1px solid gray;
+  color: white;
+}
+
+.header.scrolled {
+  background-color: white;
+  color: gray;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--main);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: gray;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  font-weight: bold;
+}
+
+.nav-links a.home-active {
+ 
+}
+
+.nav-links a:hover {
+  color: var(--main);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon {
+  color: gray;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: var(--main);
+}
+
+.header .btn {
+  font-weight: bold;
+  width: 80px;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  box-shadow: 2px 2px 14px 6px gray;
+}
+
+/* Mobile Navigation Menu */
+.mobile-menu {
+  background-color: #e9ecef !important; /* ✅ تغيير لون الخلفية */
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  padding: 15px 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+  display: flex;
+  z-index: 1;
+}
+
+.mobile-menu a {
+  color: gray !important; /* ✅ تغيير لون اللينكات */
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.mobile-menu a:hover {
+  color: #333;
+}
+
+/* Toggle Menu Icon */
+.toggle-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.toggle-icon .line {
+  width: 25px;
+  height: 3px;
+  background-color: gray;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.header.scrolled .toggle-icon .line {
+  background-color: gray;
+}
+
+/* Animation for Toggle Icon */
+.toggle-icon.open .line:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.toggle-icon.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.toggle-icon.open .line:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-links {
+      display: none;
+  }
+}
+.auth-background {
+  background: url(../../Assets/gallery/BG.png) no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* //counter */
+.cart-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-counter {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 2px 6px;
+  font-weight: bold;
+}

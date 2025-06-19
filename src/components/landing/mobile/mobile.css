@@ -1,0 +1,112 @@
+.mobile .container{
+  display: flex;
+  justify-content: space-around;
+}
+.mobile{
+  background-color: #e9ecef;
+}
+.download {
+  display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      left: 106px;
+}
+
+
+.download h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.download h2 img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.download h3 {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #666;
+}
+
+.download a {
+  display: inline-block;
+  background-color:var(--main);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.download a:hover {
+  background-color: var(--alt);
+}
+
+.store {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.store img {
+  width: 120px;
+  height: auto;
+}
+
+.download img {
+  max-width: 100%;
+  height: auto;
+}
+
+.download ~ img {
+  max-width: 100%;
+  display: block;
+  width: 400px;
+}
+@media (max-width:992px) {
+  .download ~ img {
+    margin-left: 100px;
+  }
+  
+}
+@media (max-width: 768px) {
+  .download h2 {
+    font-size: 24px;
+  }
+  
+  .download h3 {
+    font-size: 16px;
+  }
+
+  .store img {
+    width: 100px;
+  }
+
+  .download a {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .download ~ img {
+    width: 225px;
+  margin-left: 84px;
+  }
+  .download h2 img{
+    width: 181px;
+  }
+}

@@ -1,0 +1,18 @@
+.egyptian-section {
+    background-color: #f7f1d2;
+    background-image: url('../../../Assets/gallery/landing.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    color: #2d2d2d;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .egyptian-section:hover {
+    transform: scale(1.05);
+    background-color: #f1e5b9;
+  }
+  

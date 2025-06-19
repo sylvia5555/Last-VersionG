@@ -1,0 +1,124 @@
+/* تعيين التنسيق العام للقسم */
+.events-section {
+  padding: 4rem 2rem;
+  margin-top: 93px;
+}
+
+/* تنسيق العنوان */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #003366; /* اللون الأساسي */
+}
+
+/* تنسيق جريد الأحداث */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+/* تنسيق كل بطاقة */
+.event-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  padding-bottom: 47px;
+}
+
+/* تأثير الحركة على البطاقات */
+.event-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* تنسيق الصورة داخل البطاقة */
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* تنسيق محتوى البطاقة */
+.event-content {
+  padding: 1.5rem;
+}
+
+/* عنوان الحدث */
+.event-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* وصف قصير تحت العنوان */
+.event-description {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 1.5rem;
+}
+
+/* الوصف الرئيسي */
+.event-desc {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+/* تنسيق فوتر البطاقة */
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* تنسيق المكان */
+.event-location {
+  font-size: 1rem;
+  color: #0066cc;
+  font-weight: 600;
+}
+
+/* تنسيق الزر */
+.event-btn {
+  background: var(--linear-gradient);
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 20px;
+}
+
+.event-btn:hover {
+  background-color: var(--main);
+}
+.pvideo video{
+  position: absolute;
+    right: 47px;
+    top: 485px;
+    border-radius: 25px;
+    max-width: 50%;
+}
+.pvideo{
+  display: flex;
+  justify-content: space-between;
+}
+.disc {
+/* flex-basis: 50%;
+max-width: 50%; */
+padding-left: 40px;
+}
+.disc p{
+  width: 80%;
+}

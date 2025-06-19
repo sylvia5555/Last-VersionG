@@ -1,0 +1,215 @@
+
+.Payment-container {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.billing-section {
+    width: 55%;
+}
+
+.divContainer h2 {
+    margin: 2rem 0rem 3rem;
+  }
+  
+.form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group:first-child {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .form-group:first-child .name-group {
+    width: 100%;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .phone-input {
+    display: flex; 
+    gap: 0.5rem;
+  }
+
+  .phone-input select {
+    width: 15%;
+  }
+
+  /* Radio Buttons */
+.radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+  }
+  
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .radio-group input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+  }
+  
+  .radio-group input[type="radio"]:checked {
+    background-color: #007bff;
+    border: 2px solid #0056b3;
+  }
+  
+  .radio-group input[type="radio"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  /* delivery form */
+  .delivery-form  h3 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+  }
+
+  .delivery-form .deliveryDetails {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  .delivery-form .deliveryDetails h4 {
+    font-weight: bold;
+  }
+  .delivery-form .deliveryDetails * {
+    font-size: 1rem;
+  }
+  
+  /* Dropdown */
+ .dropdown-container {
+    position: relative;
+  }
+  
+ .dropdown-container input {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+ .dropdown-options {
+    position: absolute;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+    z-index: 10;
+  }
+  
+ .dropdown-options.show {
+    display: block;
+  }
+  
+ .dropdown-options div {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+ .dropdown-options div:hover {
+    background: var(--main-color);
+    color: white;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .submit-btn:hover {
+    background: #0056b3;
+  }
+
+  .order-summary {  
+      width: 35%;  
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 1.2rem;
+      padding: 1.5rem;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .order-summary table {
+        width: 100%;
+    }
+    .order-summary table tr {
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+    } 
+    .order-summary table tr td,
+    .order-summary table tr th {
+        padding: 6px 0;
+
+    }
+    .order-summary .payment-method {
+        width: 90%;
+    } 
+
+    @media (max-width: 989px) {
+        .Payment-container {
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .billing-section {
+            width: 100%;
+        }
+        .order-summary {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .form-group:first-child{
+            flex-direction: column;
+        }
+    }

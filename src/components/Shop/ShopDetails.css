@@ -1,0 +1,273 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+::selection {
+    background: var(--main-color);
+    color:white;
+}
+.divContainer {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+
+}
+
+/* small screens */
+/* @media (min-width: 768px) {
+    .divContainer {
+        width: 758px;
+    }
+} */
+
+/* medium */
+/* @media (min-width: 991px) {
+    .divContainer {
+        width: 981px;
+    }
+} */
+
+/* large */
+/* @media (min-width: 1200px) {
+    .divContainer {
+        width: 1180px;
+    }
+} */
+
+
+.item-details {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5rem;
+    margin: 7rem 0;
+}
+
+.item-img {
+    width: 35%;
+}
+
+.item-img img {
+    width: 100%;
+}
+
+
+.item-heading {
+    width: 40%;
+    font-size: 1.5rem;
+
+}
+
+
+.item-heading h1 {
+    font-size: 3.5rem;
+}
+
+.item-heading > p.item-desc {
+    color: var(--basic-color) !important;
+}
+
+.item-heading p.item-category,
+.item-heading p.item-tags {
+    font-size: 1.2rem;
+}
+
+.item-heading p span {
+    color: var(--basic-color)
+}
+
+/* button */
+.item-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .quantity-input input {
+    width: 3.5rem;
+    text-align: center;
+    border: none;
+    font-size: 1.3rem;
+    padding: 5px;
+  }
+
+  .quantity-input input:focus {
+    outline: none;
+  }
+  
+  .arrow-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .add-to-cart {
+    background: var(--main-color) !important;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+
+/* end button */
+
+
+
+/* active tabs */
+
+.tabs-container {
+    width: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  .tabs-header {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .tabs-header button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #777;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .tabs-header button:hover {
+    color: black;
+  }
+  
+  .tabs-header button.active {
+    color: black;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    position: relative; 
+  }
+  
+  .tabs-content {
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+
+/* end active tabs */
+
+
+/* review tab */
+
+.reviews-section {
+    margin-top: 20px;
+  }
+  
+.review-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+
+.reviews-section h3 {
+    margin-top: 2rem;
+}
+  
+  .stars {
+    color: gold;
+    margin-left: 10px;
+  }
+  
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .review-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 5px;
+  }
+  
+  .review-form input,
+  .review-form button {
+    padding: 8px;
+  }
+
+  .review-form input:focus,
+  .review-form textarea:focus {
+    outline: none;
+
+  }
+  
+  .review-form button {
+    background: var(--main-color);
+    color: white;
+    cursor: pointer;
+    margin-top: 1.5rem;
+  }
+  .review-form button:hover{
+    background-color: #052646;
+  }
+  /* Star Rating */
+.star-rating {
+    font-size: 25px;
+    cursor: pointer;
+  }
+  
+  .empty-star {
+    color: lightgray;
+  }
+  
+  .filled-star {
+    color: gold;
+  }
+
+/* end review tab */
+
+/* media */
+
+@media (max-width: 768px) {
+    .item-details {
+        flex-direction: column-reverse;
+    }
+
+    .item-details > div {
+        width: 100%;
+    }
+
+    .item-details div img {
+        width: 90%;
+    }
+
+    .item-details .item-btn {
+        justify-content: space-between;
+    }
+
+    .item-details .item-btn .quantity-input {
+        width: 5rem;
+    }
+}

@@ -1,0 +1,137 @@
+.back {
+  position: absolute;
+  right: 8%;
+  top: -70px;
+}
+.container .content{
+  width: 900px;
+}
+.single-page {
+  position: relative;
+  overflow: visible; /* Ensure content overflow is visible */
+}
+.single-page .container{
+  margin-top: -240px;
+}
+.main-content {
+  text-align: left;
+  position: relative; /* Add for z-index handling */
+  z-index: 10; /* Ensures content appears above overlays */
+}
+
+.main-content p {
+  margin: 10px 0 20px 0;
+}
+
+.main-content .para p {
+  margin-right: 10px;
+}
+
+.main-content h1 {
+  font-size: 30px;
+}
+
+.main-content img {
+  width: 100%;
+  height: auto;
+}
+.side-content{
+  position: relative;
+  left: 670px;
+  max-width: 583px;
+}
+.single-page .box {
+  background-color: #b69821;
+  padding: 30px;
+  color: white;
+  width: 100%;
+  height: 254px;
+}
+
+.single-page .box h2 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.single-page .box2 {
+  margin-top: 40px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 180px;
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  z-index: 1;
+  height: 254px;
+}
+
+.single-page .box2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 250px;
+  width: 100%;
+  z-index: 1;
+}
+
+.single-page .box p,.box2 p {
+  font-size: 25px;
+  line-height: 25px;
+  color: white !important;
+}
+
+.box2 p {
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Ensure text appears above the overlay */
+  font-size: 24px;
+  line-height: 25px;
+  padding-top: 66px;
+}
+
+/* Debugging - Highlight content containers */
+
+@media (max-width: 992px) {
+  .single-page .side-content {
+    flex-basis: 50%;
+    margin-left: auto;
+    width: auto;
+    margin-top: 30px;
+    text-align: center;
+  }
+  .single-page .disc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .primary-btn{
+    display: none !important;
+  }
+  .heading{
+    left: 300px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .single-page .side-content {
+    margin-left: auto;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .single-page .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  .im {
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+  }
+}
+
+/* Add global text and background fixes for debugging */
+body, .single-page, p, h1, h2 {
+  color: black !important;
+}

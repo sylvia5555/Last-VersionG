@@ -1,0 +1,202 @@
+.about {
+  padding: 40px 20px;
+}
+.land{
+  background-image: url(../../Assets/Rectangle\ 1315\ \(1\).png);
+  background-size: cover;
+  position: relative;
+  height: 74vh;
+}
+.land h1{
+  position: absolute !important;
+    color: white;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+.land::before{
+  position: absolute;
+  background-color: #000000b5;
+  content: " ";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.land h1 {
+}
+
+.aboutp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  margin-top: 92px;
+}
+
+.left {
+  flex: 1 1 400px;
+}
+
+.left h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+  color: var(--main) !important;
+}
+
+.left h3 {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.right {
+  flex: 1 1 400px;
+  gap: 15px;
+}
+
+.right img {
+  border-radius: 10px;
+  object-fit: cover;
+  margin-top: 73px;
+  width: 50%;
+}
+
+.right img:nth-child(2){
+  position: relative;
+  top: -73px;
+  left: -93px;
+}
+.weoffer {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+
+.weoffer h2,
+.mission >h2 ,
+.choose >h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #102c57;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 319px !important;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-icon {
+  font-size: 50px;
+  color: #3f72af;
+  margin-bottom: 15px;
+  margin-left: 100px;
+}
+
+.card h2 {
+  font-size: 22px;
+  color: #112d4e;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #555;
+}
+
+
+.mission{
+  margin-top: 170px;
+}
+
+.mission .aboutp{
+  margin-top: 200px;
+}
+.mission p{
+  color: #555;
+}
+.rightimg img{
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+.rightimg img:nth-child(2){
+  position: relative;
+  bottom: 154px;
+}
+.rightimg img:nth-child(3){
+  width: 200px;
+  height: 200px;
+}
+
+.choose .chooseimg{
+  width: 607px;
+  height: 467px;
+}
+.choose .aboutp{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.choose .row1{
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+.choose .row1 span{
+  width: 50%;
+}
+.choose span{
+  background-color: #F9FAEB;
+  margin-right: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.choose .row2 span{
+  display: block;
+}
+.choose .disc{
+  width: 620px;
+  margin-top: 100px;
+  color: var(--main);
+  font-weight: 700;
+}
+.choose{
+  padding: 80px;
+}
+@media (max-width:992px) {
+  .choose .aboutp{
+    flex-wrap: wrap;
+  }
+}
+@media (max-width:767px) {
+  .choose .chooseimg{
+    width: 488px;
+  }
+  .rightimg img:nth-child(2){
+    bottom: 0;
+  }
+  .rightimg img:nth-child(3){
+    margin-left: 148px;
+  }
+  .rightimg img{
+    margin: 15px;
+  }
+}

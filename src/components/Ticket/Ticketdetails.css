@@ -1,0 +1,434 @@
+/* @import url('./Ticketsdata.js'); */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.general-heading {
+    background-image: url('../../Assets/ticket1.jpg');
+
+}
+
+
+/* .ticket-details-content  */
+
+
+/* calendar */
+
+
+.ticket-details-content {
+    margin: 10rem 0; 
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+
+
+.calendar-stuff {
+  display: flex;
+  width: 55%;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  overflow: hidden;
+}
+
+.calendar-stuff i {
+  font-size: 3rem;
+  color: var(--basic-color);
+  animation: moving-arrow 0.9s linear infinite;
+  padding-top: 2rem;
+}
+
+.calendar-stuff h3 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.calendar {
+  font-size: 2rem;
+}
+
+.react-datepicker__input-container {
+  border: 2px solid var(--basic-color);
+  border-radius: 5px;
+}
+
+
+.react-datepicker-wrapper input {
+  width: 20rem;
+  border-radius: 5px;
+}
+
+.react-datepicker-wrapper input:focus {
+  outline: none;
+}
+
+
+.ticket-image-container {
+    min-width: 35%;
+}
+
+.ticket-details-content .ticket-image-container img { 
+    max-width: 75%;
+    object-fit: cover;
+}
+
+.ticket-image-container .counter:hover {
+    color: #5d5d5d; 
+}
+.ticket-image-container .counter {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    color: #bababa;
+}
+
+.ticket-image-container {
+    text-align: center;
+    font-size: 2rem;
+    width: 40%;
+}
+
+.ticket-image-container .ticket-input {
+    cursor: pointer; 
+    text-align: center;
+    width: 5rem;
+    border: none;
+    border: 1px solid #bababa;
+    color: var(--basic-color);
+    border-radius: 20px;
+    margin: 0 2rem;
+}
+
+.ticket-image-container .ticket-input:focus {
+    outline: none;
+}
+
+
+.react-datepicker__month-container  {
+  font-size: 1.2rem;
+  width: 17rem;
+}
+
+.react-datepicker__header h2 {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  display: inline-block;
+
+}
+.react-datepicker__header h2:after {
+  display: none;
+}
+
+.react-datepicker__navigation {
+  font-size: 1.5rem;
+  color: var(--basic-color);
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: var(--basic-color);
+}
+
+
+/* add-to-calendar */
+
+/* Container for dropdown */
+.calender_box {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .calender_box {
+    display: flex;
+    border: 2px solid var(--basic-color);
+    border-radius: 5px;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    align-items: center;
+
+  }
+  /* Dropdown select styling */
+.calender_box select {
+    background-color: transparent;
+    color: var(--basic-color);
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+
+  }
+
+  .calender_box select:focus-visible {
+    outline: none;
+  }
+  .calender_box svg {
+    width: 2rem;
+    color:var(--basic-color);
+  }
+  .calender_box select option {
+    width: 100%;
+  }
+  
+  /* When hovering over the dropdown */
+ .calender_box select option:hover {
+    background-color: #005bb5;
+  }
+  
+  /* On selection, change color */
+.calender_box select option:focus {
+    outline: none;
+    border: none;
+    background-color: #004999;
+  }
+
+.ticket-image-container .ticket-button {
+  color: var(--basic-color);
+  background-color: white;
+  border: 1px solid #5d5d5d;
+  border-radius: 5px; 
+  padding: .6rem 1.4rem;
+  margin-top: 2rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.ticket-image-container .ticket-button:hover {
+  color: white;
+  background-color: var(--basic-color);
+}
+
+
+/* error msg */
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  border: 1px solid #d32f2f;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 10px;
+  z-index: 10;
+}
+
+
+
+
+
+.imgbtncontainer {
+  display: flex; 
+  justify-content: center;
+
+}
+
+.radiobtncontainer label {
+  margin-left: 10px;
+}
+
+/* Style the radio button container */
+.radiobtncontainer {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Style the labels */
+.radiobtncontainer label {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+  transition: color 0.3s ease;
+}
+
+/* Hide the default radio buttons */
+.radiobtncontainer input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Custom radio button */
+.radiobtncontainer label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+/* Custom radio button when checked */
+.radiobtncontainer input[type="radio"]:checked label::before {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Inner dot effect when checked */
+.radiobtncontainer input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px; 
+  background: var(--main-color);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+
+/* Hover effect */
+.radiobtncontainer label:hover {
+  color: var(--main-color);
+}
+
+
+
+  /* details-sections */
+
+  .details-sections {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    gap: 4rem; 
+  }
+
+  .details-sections .ticket-section {
+    min-height: 85vh;
+    max-height: fit-content;
+    width: 27%;
+    font-size: 1.2rem;
+    color: var(--basic-color);
+    border-radius: 25px 0;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+
+  .ticket-section .bg-wood {
+    background-image: url(../../Assets/gallery/wooden-floor-background.jpg);
+    height: 13rem; 
+    border-radius: 25px 0 0;
+    position: relative;
+  }
+
+  .details-sections .ticket-section i.fa-solid {
+    position: absolute;
+    bottom: -2.5rem;
+    background-color: white;
+    padding: 4rem;
+    width: 5rem;
+    height: 5rem;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    left: 50%; 
+    transform: translateX(-50%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+.details-sections .ticket-section h3 {
+    font-size: 2rem;
+    padding: 3.5rem 0 0;
+    font-weight: bold;
+    color: var(--main-color);
+
+}
+
+.details-sections .ticket-section li {
+    padding: 0.5rem 0 ;
+    position: relative;
+    list-style: none;
+}
+
+/* .details-sections .ticket-section ul li:before,
+.details-sections .ticket-section p:before {
+    content: '\f185';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 1rem;
+    color: var(--basic-color);
+} */
+
+.details-sections .ticket-section li:not(:last-child):after{
+  content: '';
+  width: 25%;
+  height: 1px;
+  background-color: var(--basic-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position:absolute;
+}
+
+
+.details-sections .ticket-section ul {
+    background-color: white;
+    padding: 1rem 3rem;
+    text-align: center;
+}
+
+
+@media (max-width: 998px) {
+  .ticket-details-content {
+    max-width: 100%;
+    flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5rem;
+  }
+
+  .ticket-image-container {
+    width: 100%;
+  }
+  
+
+  .details-sections {
+    flex-direction: column;
+    height: fit-content;
+
+  }
+
+  .details-sections .ticket-section {
+    width: 100%;
+    min-height: fit-content;
+        padding-bottom:3rem ;
+
+  }
+}
+
+@keyframes moving-arrow {
+  100% {
+      transform: translateX(10px);
+  }
+}
+

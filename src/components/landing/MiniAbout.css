@@ -1,0 +1,93 @@
+
+  
+  .mini-about {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding-top: 80px;
+  }
+  
+  .mini-about-header {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .mini-about-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .mini-about-text {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .mini-about-title {
+    font-size: 1.5rem;
+    color: var(--main);
+    margin-bottom: 15px;
+  }
+  
+  .mini-about-description {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .mini-about-button {
+    background: var(--linear-gradient);
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    width: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .mini-about-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .mini-about-image {
+    flex: 1;
+  }
+  
+  .mini-about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  
+  /* لجعل التصميم متجاوبًا */
+  @media (max-width: 768px) {
+    .mini-about-content {
+      flex-direction: column-reverse;
+    }
+  
+    .mini-about-image img {
+      border-radius: 12px 12px 0 0;
+    }
+  
+    .mini-about-text {
+      text-align: center;
+    }
+  
+    .mini-about-button {
+      margin: 0 auto;
+    }
+  }
+  

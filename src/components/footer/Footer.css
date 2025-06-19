@@ -1,0 +1,122 @@
+.footer {
+    margin-top: 5rem;
+    background-color: #111;
+    color: #f1f1f1;
+    font-family: 'Georgia', serif;
+  }
+  
+  .footer-gallery {
+    box-sizing: border-box;
+    display: grid;
+    max-width: 100%;
+    grid-template-columns: repeat(6, 1fr);
+    overflow-x: hidden;
+    margin: 2rem 0;
+  }
+  
+  .footer-gallery img {
+    height: 161.725px;
+    opacity: 1;
+  }
+
+  .footer-gallery img:hover {
+    opacity: 0.7;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .footer-nav {
+    display: flex;
+    gap: 30px;
+    padding: 2rem 10%;
+    font-weight: bold;
+    position: relative;
+    margin: 2rem 0;
+  }
+
+  .footer-nav::after {
+    content: '';
+    position:absolute;
+    width: 80%;
+    height: 1px;
+    background-color: #333;
+    bottom: 0;
+  }
+  
+  .footer-nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .footer-nav a:hover {
+    color: #ffcc70;
+  }
+
+  .footer-nav a:not(:last-child):AFTER {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: #333;
+    right: -15px;
+  }
+  
+  .footer-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 30px 10%;
+    gap: 20px;
+  }
+  
+  .footer-col {
+    flex: 1 1 200px;
+    max-width: 300px;
+  }
+  
+  .footer-col h2.logo-text {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-col h3 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 6px;
+  }
+  
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    color: #ffcc70;
+  }
+  
+  .footer-col p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+
+  @media (max-width: 800px) {
+
+    .footer-gallery {
+          grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-gallery img {
+        height: 224.8px;
+    }
+
+}
