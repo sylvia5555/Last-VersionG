@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import TicketsData from "./Ticketsdata";
 import "./Ticketdetails.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const TicketDetails = () => {
@@ -12,106 +11,205 @@ const TicketDetails = () => {
   const { id } = useParams();
   const ticket = TicketsData.find((ticket) => ticket.id === parseInt(id));
 
-  /// API stuff ///
+  // State for form
+  const [value, setValue] = useState(1);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Authentication logic
+  const getAuthToken = () => {
+    const storedUser = localStorage.getItem("user-info");
+    if (!storedUser) {
+      setApiError("Please log in to proceed.");
+      navigate("/login");
+      return null;
+    }
+    return JSON.parse(storedUser).token;
+  };
+
   // Map ticket title to MuseumId
-  const getMuseumId = (title) => {
-    if (title === "Gem Children's Museum") return 1;
-    if (title === "Gem Main Galliries") return 2;
-    return null; // Fallback, though ticket should always be found
+  const getMuseumId = (museumName) => {
+    if (museumName === "Children Museum") return 1;
+    if (museumName === "Main Museum") return 2;
+    return null;
   };
 
   // Map selected ticket type to TicketTypeId
   const getTicketTypeId = (option) => {
-    if (option === "Egyptians") return 1;
-    if (option === "foreign") return 2;
-    return null; // Fallback for invalid selection
+    if (option === "Egyptian") return 1;
+    if (option === "Foreigner") return 2;
+    return null;
   };
 
-  // booking ticket 
+  // Map selected ticket type to TicketPriceId
+  const getTicketPriceId = (option) => {
+    if (option === "Egyptian") return 1;
+    if (option === "Foreigner") return 2;
+    return null;
+  };
+
+  // Format date for visitTime (YYYY-MM-DD)
+  const formatVisitTime = (date) => {
+    if (!date) return null;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Book ticket
   const bookTicket = async () => {
     setIsLoading(true);
     setApiError("");
     setBookingSuccess(false);
 
-    const museumId = getMuseumId(ticket.title);
-    const ticketTypeId = getTicketTypeId(selectedOption);
-    const quantity = value;
+    const token = getAuthToken();
+    if (!token) {
+      setIsLoading(false);
+      return;
+    }
 
-    // Validate mapped values
-    if (!museumId || !ticketTypeId || !quantity) {
-      setApiError("Invalid ticket selection or quantity.");
+    const museumId = getMuseumId(ticket.museumName);
+    const ticketTypeId = getTicketTypeId(selectedOption);
+    const ticketPriceId = getTicketPriceId(selectedOption);
+    const quantity = value;
+    const visitTime = formatVisitTime(selectedDate);
+
+    if (!museumId || !ticketTypeId || !ticketPriceId || !quantity || !visitTime) {
+      setApiError("Invalid ticket selection, quantity, or visit date.");
       setIsLoading(false);
       return;
     }
 
     const payload = {
-      MuseumId: museumId,
-      TicketTypeId: ticketTypeId,
-      Quantity: quantity,
+      museumId: museumId,
+      ticketTypeId: ticketTypeId,
+      quantity: quantity,
+      ticketPriceId: ticketPriceId,
+      visitTime: visitTime,
     };
 
     try {
+      console.log("Ticket Booking Payload:", payload); // Log payload
       const response = await axios.post(
-        "http://nightatthemuseum.runasp.net/api/ticket/book",
-        payload
+        "http://night-at-the-museum.runasp.net/api/Ticket",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
+
+      console.log("Ticket Booking Response:", response.data); // Log response
+
+      // Try multiple possible ticketId fields
+      const ticketId = response.data.ticketId || response.data.id || response.data.TicketId;
+      if (!ticketId) {
+        throw new Error("Ticket ID not found in API response");
+      }
+
       setBookingSuccess(true);
-      // Optionally, navigate to a confirmation page with response data
+
+      // Create Payment Intent
+      console.log("Creating Payment Intent for ticketId:", ticketId);
+      const paymentIntentResponse = await axios.post(
+        `http://night-at-the-museum.runasp.net/api/Ticket/${ticketId}/payment-intent`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Payment Intent Response:", paymentIntentResponse.data);
+
+      const selectedPrice = ticket.prices.find(
+        (price) => price.TypeName === selectedOption
+      )?.Price || 0;
+
       navigate("/TicketPayment", {
         state: {
           source: "ticket",
-          item: {
-            title: selectedOption,
-            quantity: value,
-            price: parseInt(
-              ticket.prices[selectedOption]?.replace(/[^\d.]/g, "") || "0"
-            ),
-            bookingData: response.data, // Pass API response if needed
+          paymentData: {
+            clientSecret: paymentIntentResponse.data.clientSecret, // Assuming clientSecret is returned
+            ticketId: ticketId,
           },
+          items: [
+            {
+              id: ticket.id,
+              title: `${ticket.title} (${selectedOption})`,
+              quantity: value,
+              price: selectedPrice,
+            },
+          ],
+          orderId: ticketId,
         },
       });
     } catch (error) {
+      console.error("Ticket Booking Error:", error);
       setApiError(
-        error.response?.data?.message || "Failed to book ticket. Please try again."
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to book ticket or create payment intent."
       );
     } finally {
       setIsLoading(false);
     }
   };
 
-  //////// API end ///////
-
-  // ticket count
-  const [value, setValue] = useState(1);
-
+  // Handle ticket count
   const handleChange = (e) => {
     const newValue = e.target.value;
-    // Ensure only numbers are entered
     if (/^-?\d*$/.test(newValue) || newValue === "") {
       setValue(newValue === "" ? "" : parseInt(newValue, 10));
     }
   };
 
-  // Date picker state
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  // add_to_calendar // Function to format date as `YYYYMMDDTHHmmSSZ`
-  const formatDateForCalendar = (date) => {
-    if (!date) return "";
-    return date.toISOString().replace(/-|:|\.\d+/g, ""); // Format as YYYYMMDDTHHmmSSZ
+  // Handle radio button
+  const handleChangeofRadio = (event) => {
+    setSelectedOption(event.target.value);
   };
 
-  // Function to open calendar with the selected date
+  // Check if form is complete
+  const isFormComplete = selectedDate && value > 0 && selectedOption;
+
+  // Handle Buy Now
+  const handleBuyNow = (e) => {
+    e.preventDefault();
+    if (!isFormComplete) {
+      setErrorMessage(
+        "⚠️ Please select a date, ticket type, and at least one ticket before buying."
+      );
+      setTimeout(() => setErrorMessage(""), 3000);
+    } else {
+      setErrorMessage("");
+      bookTicket();
+    }
+  };
+
+  // Calendar functions (unchanged)
+  const formatDateForCalendar = (date) => {
+    if (!date) return "";
+    return date.toISOString().replace(/-|:|\.\d+/g, "");
+  };
+
   const handleCalendarSelect = (event) => {
     if (!selectedDate) {
       alert("Please select a date first.");
       return;
     }
-
     const formattedDate = formatDateForCalendar(selectedDate);
     const eventTitle = encodeURIComponent(ticket.title || "Event");
     const startTime = formattedDate;
-    const endTime = formattedDate; // Modify this if you need a duration
+    const endTime = formattedDate;
 
     let url = "";
     switch (event.target.value) {
@@ -130,41 +228,7 @@ const TicketDetails = () => {
       default:
         return;
     }
-
     window.open(url, "_blank");
-  };
-
-  // radio btn
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const handleChangeofRadio = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
-  // Check if the ticket details are complete
-  const [errorMessage, setErrorMessage] = useState(""); // Error message state
-
-  // API error handling 
-  const [isLoading, setIsLoading] = useState(false);
-  const [apiError, setApiError] = useState("");
-  const [bookingSuccess, setBookingSuccess] = useState(false);
-  // Function to check if all fields are filled
-  const isFormComplete = selectedDate && value > 0 && selectedOption;
-
-  // Handle Buy Now click
-  const handleBuyNow = (e) => {
-    e.preventDefault(); // Prevent default navigation until API call succeeds
-    if (!isFormComplete) {
-      setErrorMessage(
-        "⚠️ Please select a date, ticket type, and at least one ticket before buying."
-      );
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
-    } else {
-      setErrorMessage(""); // Clear error when valid
-      bookTicket(); // Call API instead of navigating directly
-    }
   };
 
   return (
@@ -180,8 +244,6 @@ const TicketDetails = () => {
               <div className="calendar-stuff">
                 <div className="calendar">
                   <h3>Pick a date:</h3>
-
-                  {/* Date Picker */}
                   <DatePicker
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
@@ -190,9 +252,7 @@ const TicketDetails = () => {
                     className="p-2 border rounded-md text-lg"
                   />
                 </div>
-
-                <i class="fa-solid fa-angles-right"></i>
-
+                <i className="fa-solid fa-angles-right"></i>
                 <div className="add_to_calendar">
                   <h3>Add to Calendar:</h3>
                   <div className="calender_box">
@@ -233,22 +293,19 @@ const TicketDetails = () => {
                 />
                 <div className="imgbtncontainer">
                   <div className="radiobtncontainer">
-                    {/* <h3>Select Your Ticket Type:</h3> */}
-                    {Object.keys(ticket.prices).map((key) => (
-                      <>
+                    {ticket.prices.map((price) => (
+                      <React.Fragment key={price.TicketTypeId}>
                         <input
                           type="radio"
-                          id={key}
+                          id={price.TypeName}
                           name="ticketType"
-                          value={key}
-                          checked={selectedOption === key}
+                          value={price.TypeName}
+                          checked={selectedOption === price.TypeName}
                           onChange={handleChangeofRadio}
                         />
-                        <label htmlFor={key}>{key}</label>
-                      </>
+                        <label htmlFor={price.TypeName}>{price.TypeName}</label>
+                      </React.Fragment>
                     ))}
-
-                    {/* <p>Selected: {selectedOption || "None"}</p> */}
                   </div>
                   <div className="btncontainer">
                     <div className="mt-4">
@@ -278,22 +335,19 @@ const TicketDetails = () => {
                     >
                       {isLoading ? "Booking..." : "Buy Now"}
                     </button>
-                    {/* Success or error feedback */}
                     {bookingSuccess && (
                       <p className="success-message">✅ Ticket booked successfully!</p>
                     )}
                     {apiError && <p className="error-message">⚠️ {apiError}</p>}
-                    {/* Existing form error message */}
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="details-sections">
               <div className="ticket-section">
                 <div className="bg-wood">
-                  <i class="fa-solid fa-info"></i>
+                  <i className="fa-solid fa-info"></i>
                 </div>
                 <h3>Information</h3>
                 <ul>
@@ -304,7 +358,7 @@ const TicketDetails = () => {
               </div>
               <div className="ticket-section">
                 <div className="bg-wood">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <i className="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <h3>Description</h3>
                 <ul>
@@ -313,21 +367,21 @@ const TicketDetails = () => {
                   ))}
                 </ul>
               </div>
-
               <div className="ticket-section">
                 <div className="bg-wood">
-                  <i class="fa-solid fa-money-check-dollar"></i>
+                  <i className="fa-solid fa-money-check-dollar"></i>
                 </div>
                 <h3>Prices</h3>
-                {Object.keys(ticket.prices).map((key) => (
-                  <li key={key}>
-                    <strong>{key}:</strong> {ticket.prices[key]}
-                  </li>
-                ))}
+                <ul>
+                  {ticket.prices.map((price) => (
+                    <li key={price.TicketTypeId}>
+                      <strong>{price.TypeName}:</strong> EGP {price.Price.toFixed(2)}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-          {/* <Footer /> */}
         </>
       ) : (
         <p>The ticket does not exist</p>
