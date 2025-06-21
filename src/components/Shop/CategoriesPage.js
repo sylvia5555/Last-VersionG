@@ -10,7 +10,7 @@ const CategoriesPage = () => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(
-          "http://nightatthemuseum.runasp.net/api/Souvenir/Types"
+          "http://night-at-the-museum.runasp.net/api/Souvenir/Types"
         );
         const data = await res.json();
         setCategories(data); // data is an array of objects with { id, name }

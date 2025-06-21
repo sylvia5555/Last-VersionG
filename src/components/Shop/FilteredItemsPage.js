@@ -10,7 +10,7 @@ const FilteredItemsPage = () => {
     const fetchItems = async () => {
       try {
         const res = await fetch(
-          "http://nightatthemuseum.runasp.net/api/Souvenir"
+          "http://night-at-the-museum.runasp.net/api/Souvenir"
         );
         const data = await res.json();
 
@@ -36,31 +36,33 @@ const FilteredItemsPage = () => {
   }, [categoryName]);
 
   return (
-    <div className="divContainer">
+    <>
       <div className="general-heading">
         <p>Items in</p>
         <h1>{categoryName}</h1>
       </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : items.length === 0 ? (
-        <p>No items found in this category.</p>
-      ) : (
-        <div className="shop-container columns-4">
-          {items.map((item) => (
-            <div key={item.id} className="shop-item">
-              <Link to={`/item/${item.id}`} className="itemTitle">
-                <img src={item.pictureUrl} alt={item.name} />
-              </Link>
-              <h3>{item.name}</h3>
-              <p className="itemPrice">₺{item.price}</p>
-              <button>Add to cart</button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+      <div className="divContainer">
+        {loading ? (
+          <p>Loading...</p>
+        ) : items.length === 0 ? (
+          <p>No items found in this category.</p>
+        ) : (
+          <div className="shop-container columns-4">
+            {items.map((item) => (
+              <div key={item.id} className="shop-item">
+                <Link to={`/item/${item.id}`} className="itemTitle">
+                  <img src={item.pictureUrl} alt={item.name} />
+                </Link>
+                <h3>{item.name}</h3>
+                <p className="itemPrice">₺{item.price}</p>
+                <button>Add to cart</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
